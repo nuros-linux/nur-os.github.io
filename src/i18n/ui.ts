@@ -41,8 +41,7 @@ export const teamData: Record<Lang, { name: string; role: string; skills: string
     { name: 'Rav1non', role: 'Developer, Package Builder', skills: 'Python, Java' },
     { name: 'got/gotrt', role: 'Developer', skills: 'Go, OCaml, C' },
     { name: 'b0nn133', role: 'Designer, Developer', skills: 'Vala, C#, Lua, Python' },
-    { name: 'XCubicArnament', role: 'Developer', skills: 'C, C++, Python, JS' },
-    { name: 'wholos', role: 'Developer', skills: 'C, C++, Nim, Rust' },
+    { name: 'XCubicArnament', role: 'Developer', skills: 'C, C++, Python, JS' }
   ],
   ru: [
     { name: 'CosmoBlade', role: 'Тимлид, Разработчик, Дизайнер', skills: 'C++, Python, Go, JS, C' },
@@ -55,8 +54,7 @@ export const teamData: Record<Lang, { name: string; role: string; skills: string
     { name: 'Rav1non', role: 'Разработчик, Сборка пакетов', skills: 'Python, Java' },
     { name: 'got/gotrt', role: 'Разработчик', skills: 'Go, OCaml, C' },
     { name: 'b0nn133', role: 'Дизайнер, Разработчик', skills: 'Vala, C#, Lua, Python' },
-    { name: 'XCubicArnament', role: 'Разработчик', skills: 'C, C++, Python, JS' },
-    { name: 'wholos', role: 'Разработчик', skills: 'C, C++, Nim, Rust' },
+    { name: 'XCubicArnament', role: 'Разработчик', skills: 'C, C++, Python, JS' }
   ],
   kz: [
     { name: 'CosmoBlade', role: 'Тимлид, Әзірлеуші, Дизайнер', skills: 'C++, Python, Go, JS, C' },
@@ -69,8 +67,7 @@ export const teamData: Record<Lang, { name: string; role: string; skills: string
     { name: 'Rav1non', role: 'Әзірлеуші, Пакет жинаушы', skills: 'Python, Java' },
     { name: 'got/gotrt', role: 'Әзірлеуші', skills: 'Go, OCaml, C' },
     { name: 'b0nn133', role: 'Дизайнер, Әзірлеуші', skills: 'Vala, C#, Lua, Python' },
-    { name: 'XCubicArnament', role: 'Әзірлеуші', skills: 'C, C++, Python, JS' },
-    { name: 'wholos', role: 'Әзірлеуші', skills: 'C, C++, Nim, Rust' },
+    { name: 'XCubicArnament', role: 'Әзірлеуші', skills: 'C, C++, Python, JS' }
   ],
 };
 
