@@ -32,10 +32,10 @@ const lang = getLangFromUrl(Astro.url);
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <slot />
     <script is:inline src="https://keepandroidopen.org/banner.js?size=minimal&animation=off"></script>
-    <style>
+    <style is:global>
       .kao-banner {
         position: fixed !important;
-        top: 0;
+        top: 0 !important;
         left: 0;
         right: 0;
         width: 100%;
@@ -44,23 +44,39 @@ const lang = getLangFromUrl(Astro.url);
     </style>
     <script is:inline>
       (function () {
+        var observed = null;
+
+        function bannerVisible(banner) {
+          return banner &&
+            banner.offsetParent !== null &&
+            getComputedStyle(banner).display !== 'none';
+        }
+
         function adjustHeader() {
-          var banner = document.querySelector('.kao-banner');
           var header = document.querySelector('header');
           if (!header) return;
-          if (banner && banner.style.display !== 'none') {
-            header.style.top = banner.offsetHeight + 'px';
-          } else {
-            header.style.top = '0';
+          var banner = document.querySelector('.kao-banner');
+          var bannerH = bannerVisible(banner) ? banner.offsetHeight : 0;
+          header.style.top = bannerH + 'px';
+          document.body.style.paddingTop = (bannerH + header.offsetHeight) + 'px';
+
+          if (banner && observed !== banner) {
+            observed = banner;
+            new MutationObserver(adjustHeader).observe(banner, {
+              attributes: true,
+              attributeFilter: ['style', 'class'],
+            });
+            if (window.ResizeObserver) new ResizeObserver(adjustHeader).observe(banner);
           }
         }
-        window.addEventListener('load', function () {
+
+        var tries = 0;
+        var poll = setInterval(function () {
           adjustHeader();
-          var banner = document.querySelector('.kao-banner');
-          if (banner) {
-            new MutationObserver(adjustHeader).observe(banner, { attributes: true, attributeFilter: ['style'] });
-          }
-        });
+          if (document.querySelector('.kao-banner') || ++tries > 40) clearInterval(poll);
+        }, 100);
+
+        window.addEventListener('load', adjustHeader);
         window.addEventListener('resize', adjustHeader);
       })();
     </script>
