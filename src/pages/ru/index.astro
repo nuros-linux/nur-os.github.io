@@ -3,9 +3,8 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
 import About from '../../components/About.astro';
-import Features from '../../components/Features.astro';
-import Requirements from '../../components/Requirements.astro';
 import Community from '../../components/Community.astro';
+import DownloadCta from '../../components/DownloadCta.astro';
 import Footer from '../../components/Footer.astro';
 ---
 
@@ -14,10 +13,15 @@ import Footer from '../../components/Footer.astro';
     <Header />
     <main id="main-content">
       <Hero />
-      <About />
-      <Features />
-      <Requirements />
-      <Community />
+      <section class="bento-section">
+        <div class="container">
+          <div class="bento-grid">
+            <About />
+            <Community />
+            <DownloadCta />
+          </div>
+        </div>
+      </section>
     </main>
     <Footer />
   </div>

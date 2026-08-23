@@ -7,10 +7,10 @@ const t = useTranslations(lang);
 <section id="home" class="hero">
   <div class="container">
     <div class="hero-content">
-      <h1 class="hero-title">NurOS <span class="hero-title-accent">"Juldyz"</span></h1>
-      <p class="hero-subtitle">{t('hero.subtitle')}</p>
+      <h1 class="hero-title display-medium emphasized">NurOS</h1>
+      <p class="hero-subtitle body-large">{t('hero.subtitle')}</p>
       <div class="cta-buttons">
-        <a href={lang === 'ru' ? '/ru/releases' : '/releases'} class="btn hero-btn">{t('hero.cta')}</a>
+        <a href={lang === 'ru' ? '/ru/releases' : '/releases'} class="btn btn-lg hero-btn">{t('hero.cta')}</a>
       </div>
     </div>
   </div>
@@ -18,62 +18,37 @@ const t = useTranslations(lang);
 
 <style>
   .hero {
-    min-height: 100vh;
+    min-height: 88vh;
+    padding: var(--spacing-xl) 0 var(--spacing-lg);
     display: flex;
     align-items: center;
-    background-color: var(--background);
-    background-image: radial-gradient(ellipse 70% 55% at 50% 45%, rgba(15, 80, 180, 0.45) 0%, rgba(10, 50, 120, 0.15) 50%, transparent 75%);
+    background-color: var(--md-surface);
     position: relative;
   }
 
   .hero-content {
-    max-width: 640px;
+    max-width: 680px;
     text-align: center;
     margin: 0 auto;
   }
 
   .hero-title {
-    font-size: 3.5rem;
-    font-weight: 700;
     margin-bottom: var(--spacing-sm);
-    color: #fff;
+    color: var(--md-on-surface);
     letter-spacing: -0.02em;
   }
 
-  .hero-title-accent {
-    background: linear-gradient(135deg, #4db8ff, #1a8fe3);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
   .hero-subtitle {
-    font-size: 1.1rem;
     margin-bottom: var(--spacing-md);
-    color: rgba(224, 224, 224, 0.6);
+    color: var(--md-on-surface-variant);
   }
 
   .hero-btn {
-    font-size: 1rem;
-    padding: 0.75rem 2.5rem;
-    background: #1a8fe3;
-    border-radius: 10px;
-    font-weight: 600;
-    transition: background 0.2s ease, transform 0.2s ease;
+    box-shadow: var(--elevation-2);
   }
-
-  .hero-btn:hover {
-    background: #1679c5;
-    transform: translateY(-2px);
-    color: #fff;
-    opacity: 1;
-  }
-
-  @media (max-width: 768px) {
-    .hero-title { font-size: 2.5rem; }
-  }
+  .hero-btn:hover { box-shadow: var(--elevation-3); }
 
   @media (max-width: 576px) {
-    .hero-title { font-size: 2rem; }
+    .hero-title { font-size: 2.25rem; line-height: 2.75rem; }
   }
 </style>

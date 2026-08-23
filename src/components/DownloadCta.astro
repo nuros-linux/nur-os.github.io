@@ -1,0 +1,38 @@
+---
+import { useTranslations, getLangFromUrl, type Lang } from '../i18n/ui';
+const lang = getLangFromUrl(Astro.url) as Lang;
+const t = useTranslations(lang);
+const releasesHref = lang === 'ru' ? '/ru/releases' : lang === 'kz' ? '/kz/releases' : '/releases';
+---
+
+<div class="bento-tile tile-download">
+  <div class="tile-download-text">
+    <h2 class="tile-title headline-small">{t('download.title')}</h2>
+    <p class="tile-text body-medium">{t('download.subtitle')}</p>
+  </div>
+  <a href={releasesHref} class="fab fab-extended">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    {t('hero.cta')}
+  </a>
+</div>
+
+<style>
+  .tile-download {
+    grid-column: 1 / -1;
+    background-color: var(--md-primary-container);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+  .tile-download .tile-title,
+  .tile-download .tile-text { color: var(--md-on-primary-container); }
+  .tile-text { opacity: 0.85; }
+  .tile-download .fab-extended {
+    background-color: var(--md-surface-container-highest);
+    color: var(--md-on-surface);
+    box-shadow: var(--elevation-1);
+  }
+  .tile-download .fab-extended:hover { box-shadow: var(--elevation-2); }
+</style>

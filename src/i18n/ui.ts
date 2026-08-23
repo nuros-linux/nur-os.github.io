@@ -76,11 +76,13 @@ export type DownloadArch = { name: string; link: string | null };
 export type DownloadEdition = { id: 'juldyz' | 'josh'; arches: DownloadArch[] };
 
 const ARCHES: DownloadArch[] = [
-  { name: 'x86_64',          link: 'https://t.me/nuros_ru/754' },
-  { name: 'x86',             link: null },
-  { name: 'aarch64 & armv7', link: null },
-  { name: 'RV64GC & RV32GC', link: null },
-  { name: 'MIPS32',          link: null },
+  { name: 'x86_64',  link: 'https://t.me/nuros_ru/754' },
+  { name: 'x86',     link: null },
+  { name: 'aarch64', link: null },
+  { name: 'armv7',   link: null },
+  { name: 'RV64GC',  link: null },
+  { name: 'RV32GC',  link: null },
+  { name: 'MIPS32',  link: null },
 ];
 
 export const downloadEditions: DownloadEdition[] = [

@@ -15,21 +15,21 @@ const t = useTranslations(lang);
       <div class="container">
 
         <div class="dl-header">
-          <span class="rolling-badge">{t('download.rolling')}</span>
-          <h1 class="dl-title">{t('download.title')}</h1>
-          <p class="dl-sub">{t('download.subtitle')}</p>
+          <span class="rolling-badge label-medium">{t('download.rolling')}</span>
+          <h1 class="dl-title display-small">{t('download.title')}</h1>
+          <p class="dl-sub body-large">{t('download.subtitle')}</p>
         </div>
 
         {downloadEditions.map((edition) => (
           <section class="edition">
             <div class="edition-head">
               <div class="edition-name-row">
-                <h2 class="edition-name">{edition.id === 'juldyz' ? 'Juldyz' : 'Josh'}</h2>
-                <span class={`edition-badge ${edition.id}`}>
+                <h2 class="edition-name headline-small">{edition.id === 'juldyz' ? 'Juldyz' : 'Josh'}</h2>
+                <span class={`edition-badge label-small ${edition.id}`}>
                   {t(edition.id === 'juldyz' ? 'download.juldyz.label' : 'download.josh.label')}
                 </span>
               </div>
-              <p class="edition-desc">
+              <p class="edition-desc body-medium">
                 {t(edition.id === 'juldyz' ? 'download.juldyz.desc' : 'download.josh.desc')}
               </p>
             </div>
@@ -37,15 +37,15 @@ const t = useTranslations(lang);
             <div class="arch-grid">
               {edition.arches.map((arch) => (
                 <div class="arch-card">
-                  <span class="arch-name">{arch.name}</span>
+                  <span class="arch-name label-large">{arch.name}</span>
                   {arch.link ? (
-                    <a href={arch.link} class="arch-btn arch-btn--get" target="_blank" rel="noopener"
+                    <a href={arch.link} class="btn btn-sm arch-btn--get" target="_blank" rel="noopener"
                        aria-label={`${t('download.get')} NurOS ${edition.id === 'juldyz' ? 'Juldyz' : 'Josh'} — ${arch.name}`}>
                       {t('download.get')}
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     </a>
                   ) : (
-                    <span class="arch-btn arch-btn--soon">{t('download.soon')}</span>
+                    <span class="arch-btn arch-btn--soon label-small">{t('download.soon')}</span>
                   )}
                 </div>
               ))}
@@ -53,7 +53,7 @@ const t = useTranslations(lang);
           </section>
         ))}
 
-        <p class="dl-note">{t('download.note')}</p>
+        <p class="dl-note body-small">{t('download.note')}</p>
 
       </div>
     </main>
@@ -69,28 +69,21 @@ const t = useTranslations(lang);
 
   .rolling-badge {
     display: inline-block;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
     text-transform: uppercase;
     padding: 0.2rem 0.7rem;
-    border-radius: 999px;
-    border: 1px solid rgba(138,180,232,0.35);
-    color: var(--accent-color);
+    border-radius: var(--shape-full);
+    border: 1px solid var(--md-outline);
+    color: var(--md-primary);
     margin-bottom: 0.75rem;
   }
 
   .dl-title {
-    font-size: clamp(2rem, 5vw, 2.8rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    color: var(--text-color);
+    color: var(--md-on-surface);
     margin-bottom: 0.5rem;
   }
 
   .dl-sub {
-    font-size: 1.05rem;
-    color: var(--text-muted);
+    color: var(--md-on-surface-variant);
   }
 
   .edition {
@@ -109,35 +102,26 @@ const t = useTranslations(lang);
   }
 
   .edition-name {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-color);
+    color: var(--md-on-surface);
   }
 
   .edition-badge {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
     text-transform: uppercase;
     padding: 0.2rem 0.65rem;
-    border-radius: 999px;
+    border-radius: var(--shape-full);
   }
   .edition-badge.juldyz {
-    background: rgba(26,91,156,0.3);
-    border: 1px solid rgba(138,180,232,0.35);
-    color: var(--accent-color);
+    background: var(--md-secondary-container);
+    color: var(--md-on-secondary-container);
   }
   .edition-badge.josh {
-    background: rgba(80,50,120,0.3);
-    border: 1px solid rgba(180,140,220,0.35);
-    color: #c4a8e8;
+    background: var(--md-tertiary-container);
+    color: var(--md-on-tertiary-container);
   }
 
   .edition-desc {
-    font-size: 0.95rem;
-    color: var(--text-muted);
+    color: var(--md-on-surface-variant);
     max-width: 540px;
-    line-height: 1.6;
   }
 
   .arch-grid {
@@ -152,52 +136,38 @@ const t = useTranslations(lang);
     justify-content: space-between;
     gap: 0.75rem;
     padding: 0.9rem 1rem;
-    background: var(--foreground);
-    border: var(--border);
-    border-radius: var(--border-radius);
-    transition: border-color .2s;
+    background: var(--md-surface-container);
+    border-radius: var(--shape-lg-increased);
+    box-shadow: var(--elevation-0);
+    transition: box-shadow var(--motion-medium-1) var(--easing-standard), background-color var(--motion-medium-1) var(--easing-standard);
   }
-  .arch-card:hover { border-color: rgba(138,180,232,0.3); }
+  .arch-card:hover { box-shadow: var(--elevation-1); background-color: var(--md-surface-container-high); }
 
   .arch-name {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--text-color);
+    color: var(--md-on-surface);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     font-family: 'SF Mono', 'Fira Mono', monospace;
   }
 
-  .arch-btn {
-    flex-shrink: 0;
+  .arch-btn--soon {
     display: inline-flex;
     align-items: center;
-    gap: 0.3rem;
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 0.3rem 0.75rem;
-    border-radius: 6px;
-    white-space: nowrap;
-    transition: background .2s, transform .2s;
-  }
-  .arch-btn--get {
-    background: var(--primary-color);
-    color: #fff;
-  }
-  .arch-btn--get:hover { background: var(--primary-hover); transform: translateY(-1px); opacity: 1; color: #fff; }
-  .arch-btn--soon {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: var(--text-muted);
+    flex-shrink: 0;
+    height: 2rem;
+    padding: 0 1rem;
+    border-radius: var(--shape-full);
+    background: var(--md-surface-container-high);
+    border: 1px solid var(--md-outline-variant);
+    color: var(--md-on-surface-variant);
     cursor: default;
-    font-size: 0.75rem;
+    white-space: nowrap;
   }
 
   .dl-note {
     text-align: center;
-    font-size: 0.85rem;
-    color: var(--text-muted);
+    color: var(--md-on-surface-variant);
     margin-top: var(--spacing-md);
     padding-top: var(--spacing-md);
     border-top: var(--border);

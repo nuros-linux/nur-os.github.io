@@ -28,15 +28,15 @@ const dateStr = publishedAt
   <div class="card-body">
     {tags.length > 0 && (
       <div class="tags">
-        {tags.map((tag) => <span class="tag">{tag}</span>)}
+        {tags.map((tag) => <span class="tag label-small">{tag}</span>)}
       </div>
     )}
-    <h2 class="card-title">
+    <h2 class="card-title title-large">
       <a href={`${blogBase}/${slug}`} aria-label={title}>{title}</a>
     </h2>
-    {description && <p class="card-desc">{description}</p>}
+    {description && <p class="card-desc body-medium">{description}</p>}
   </div>
-  <div class="card-footer">
+  <div class="card-footer label-medium">
     {author && <span class="author">{author}</span>}
     {dateStr && <time datetime={publishedAt?.toISOString()}>{dateStr}</time>}
     <a href={`${blogBase}/${slug}`} class="read-more" aria-hidden="true" tabindex="-1">{t('blog.read')}</a>
@@ -44,17 +44,17 @@ const dateStr = publishedAt
 </article>
 
 <style>
-  .blog-card { background-color: var(--foreground); border: var(--border); border-radius: var(--border-radius); display: flex; flex-direction: column; transition: transform .3s ease, box-shadow .3s ease; }
-  .blog-card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,.25); }
+  .blog-card { background-color: var(--md-surface-container); border-radius: var(--shape-lg-increased); box-shadow: var(--elevation-0); display: flex; flex-direction: column; transition: box-shadow var(--motion-medium-1) var(--easing-standard), background-color var(--motion-medium-1) var(--easing-standard), border-radius var(--motion-medium-2) var(--easing-spring); }
+  .blog-card:hover { box-shadow: var(--elevation-2); background-color: var(--md-surface-container-high); border-radius: var(--shape-xl-increased); }
   .card-body { padding: var(--spacing-md); flex: 1; }
   .tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: var(--spacing-sm); }
-  .tag { font-size: .75rem; padding: .2rem .6rem; background-color: rgba(26,91,156,.25); color: var(--accent-color); border-radius: 999px; border: 1px solid rgba(138,180,232,.25); }
-  .card-title { font-size: 1.25rem; font-weight: 600; margin-bottom: var(--spacing-xs); line-height: 1.4; }
-  .card-title a { color: var(--text-color); transition: color .3s ease; }
-  .card-title a:hover { color: var(--accent-color); opacity: 1; }
-  .card-desc { font-size: .95rem; color: rgba(224,224,224,.75); line-height: 1.6; }
-  .card-footer { display: flex; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-sm) var(--spacing-md); border-top: var(--border); font-size: .85rem; color: rgba(224,224,224,.5); }
-  .author { flex: 1; color: var(--accent-color); opacity: .8; }
-  .read-more { color: var(--accent-color); font-weight: 500; white-space: nowrap; opacity: 1; }
-  .read-more:hover { color: white; opacity: 1; }
+  .tag { padding: .25rem .7rem; background-color: var(--md-secondary-container); color: var(--md-on-secondary-container); border-radius: var(--shape-full); }
+  .card-title { margin-bottom: var(--spacing-xs); }
+  .card-title a { color: var(--md-on-surface); transition: color var(--motion-medium-1) var(--easing-standard); }
+  .card-title a:hover { color: var(--md-primary); opacity: 1; }
+  .card-desc { color: var(--md-on-surface-variant); }
+  .card-footer { display: flex; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-sm) var(--spacing-md); border-top: 1px solid var(--md-outline-variant); color: var(--md-on-surface-variant); }
+  .author { flex: 1; color: var(--md-primary); }
+  .read-more { color: var(--md-primary); white-space: nowrap; opacity: 1; }
+  .read-more:hover { opacity: .85; }
 </style>
