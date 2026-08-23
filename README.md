@@ -4,6 +4,12 @@ The official website of **NurOS**, an independent Linux distribution.
 
 Built with [Astro](https://astro.build), styled as a Material 3 Expressive design system, and content-managed with [Keystatic](https://keystatic.com).
 
+> [!NOTE]
+> **Repository Mirrors**
+>
+> - **git.nuros.org** ([web/nuros.org](https://git.nuros.org/web/nuros.org)): primary, self-hosted Forgejo instance, accounts restricted to the core team.
+> - **GitHub** ([NurOS-Linux/nuroslinux.github.io](https://github.com/NurOS-Linux/nuroslinux.github.io)): mirror for external contributors. Issues and Pull Requests opened here are welcome and are reviewed and processed by the core team.
+
 ## Getting started
 
 ```bash
