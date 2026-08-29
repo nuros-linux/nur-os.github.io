@@ -1,14 +1,19 @@
 ---
 import BlogLayout from '../../../layouts/BlogLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content'; 
+import { useTranslations, getLangFromUrl, type Lang } from '../../../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url) as Lang;
+const t = useTranslations(lang);
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts-kz');
-  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+
+const { Content } = await render(post);
 
 const dateStr = post.data.publishedAt
   ? post.data.publishedAt.toLocaleDateString('kk-KZ', { year: 'numeric', month: 'long', day: 'numeric' })
@@ -18,7 +23,7 @@ const dateStr = post.data.publishedAt
 <BlogLayout title={`${post.data.title} — NurOS Blog`} description={post.data.description}>
   <article class="post-article">
     <div class="container">
-      <a href="/kz/blog" class="back-link"><span aria-hidden="true">←</span> Блогқа оралу</a>
+      <a href=`/${lang}/blog` class="back-link">{t('blog.back')}</a>
 
       {post.data.tags && post.data.tags.length > 0 && (
         <div class="tags">{post.data.tags.map((tag) => <span class="tag">{tag}</span>)}</div>
