@@ -39,5 +39,6 @@
   "blog.title": "Блог",
   "blog.empty": "Пока нет публикаций. Загляните позже!",
   "blog.back": "← Назад к блогу",
+  "blog.description": "Новости и статьи про NurOS",
   "blog.read": "Читать →"
 }

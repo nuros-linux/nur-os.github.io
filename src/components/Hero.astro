@@ -10,7 +10,7 @@ const t = useTranslations(lang);
       <h1 class="hero-title display-medium emphasized">NurOS</h1>
       <p class="hero-subtitle body-large">{t('hero.subtitle')}</p>
       <div class="cta-buttons">
-        <a href={lang === 'ru' ? '/ru/releases' : '/releases'} class="btn btn-lg hero-btn">{t('hero.cta')}</a>
+        <a href={lang !== "en" ? `/${lang}/releases` : '/releases'} class="btn btn-lg hero-btn">{t('hero.cta')}</a>
       </div>
     </div>
   </div>

@@ -40,7 +40,7 @@ export const teamData: Record<Lang, { name: string; role: string; skills: string
     { name: 'Space', role: 'Developer, Aether Apps Developer', skills: 'Python, C#' },
     { name: 'Rav1non', role: 'Developer, Package Builder', skills: 'Python, Java' },
     { name: 'got/gotrt', role: 'Developer', skills: 'Go, OCaml, C' },
-    { name: 'b0nn133', role: 'Designer, Developer', skills: 'Vala, C#, Lua, Python' },
+    { name: '60nn13', role: 'Designer, Developer', skills: 'TS, C#, Lua, Python, Nim' },
     { name: 'XCubicArnament', role: 'Developer', skills: 'C, C++, Python, JS' }
   ],
   ru: [
@@ -53,7 +53,7 @@ export const teamData: Record<Lang, { name: string; role: string; skills: string
     { name: 'Space', role: 'Разработчик, Разработчик Aether Apps', skills: 'Python, C#' },
     { name: 'Rav1non', role: 'Разработчик, Сборка пакетов', skills: 'Python, Java' },
     { name: 'got/gotrt', role: 'Разработчик', skills: 'Go, OCaml, C' },
-    { name: 'b0nn133', role: 'Дизайнер, Разработчик', skills: 'Vala, C#, Lua, Python' },
+    { name: '60nn13', role: 'Дизайнер, Разработчик', skills: 'TS, C#, Lua, Python, Nim' },
     { name: 'XCubicArnament', role: 'Разработчик', skills: 'C, C++, Python, JS' }
   ],
   kz: [
@@ -66,7 +66,7 @@ export const teamData: Record<Lang, { name: string; role: string; skills: string
     { name: 'Space', role: 'Әзірлеуші, Aether Apps Әзірлеушісі', skills: 'Python, C#' },
     { name: 'Rav1non', role: 'Әзірлеуші, Пакет жинаушы', skills: 'Python, Java' },
     { name: 'got/gotrt', role: 'Әзірлеуші', skills: 'Go, OCaml, C' },
-    { name: 'b0nn133', role: 'Дизайнер, Әзірлеуші', skills: 'Vala, C#, Lua, Python' },
+    { name: '60nn13', role: 'Дизайнер, Әзірлеуші', skills: 'TS, C#, Lua, Python, Nim' },
     { name: 'XCubicArnament', role: 'Әзірлеуші', skills: 'C, C++, Python, JS' }
   ],
 };

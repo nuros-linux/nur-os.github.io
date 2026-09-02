@@ -39,5 +39,6 @@
   "blog.title": "Blog",
   "blog.empty": "No posts yet. Check back later!",
   "blog.back": "← Back to blog",
+  "blog.description": "News and articles about NurOS",
   "blog.read": "Read →"
 }

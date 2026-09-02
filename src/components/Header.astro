@@ -14,7 +14,7 @@ const navHref = (anchor: string) => {
 
 <header id="site-header">
   <div class="container">
-    <a href={lang === 'ru' ? '/ru' : lang === 'kz' ? '/kz' : '/'} class="logo-link" aria-label="NurOS — Home">
+    <a href={lang !== 'en' ? `/${lang}` : '/'} class="logo-link" aria-label="NurOS — Home">
       <span class="logo-text title-large">Nur<span class="logo-os">OS</span></span>
     </a>
 
@@ -24,7 +24,7 @@ const navHref = (anchor: string) => {
         <li>
           <a
             class="nav-item label-large"
-            href={lang === 'ru' ? '/ru/releases' : lang === 'kz' ? '/kz/releases' : '/releases'}
+            href={lang !== 'en' ? `/${lang}/releases` : '/releases'}
             class:list={[{ active: path.includes('/releases') }]}
             aria-current={path.includes('/releases') ? 'page' : undefined}
           >{t('nav.download')}</a>
@@ -32,16 +32,15 @@ const navHref = (anchor: string) => {
         <li>
           <a
             class="nav-item label-large"
-            href={lang === 'ru' ? '/ru/team' : lang === 'kz' ? '/kz/team' : '/team'}
+            href={lang !== 'en' ? `/${lang}/team` : '/team'}
             class:list={[{ active: path.endsWith('/team') }]}
             aria-current={path.endsWith('/team') ? 'page' : undefined}
           >{t('nav.team')}</a>
         </li>
-        <li><a class="nav-item label-large" href={navHref('#community')}>{t('nav.community')}</a></li>
         <li>
           <a
             class="nav-item label-large"
-            href={lang === 'ru' ? '/ru/blog' : lang === 'kz' ? '/kz/blog' : '/blog'}
+            href={lang !== 'en' ? `/${lang}/blog` : '/blog'}
             class:list={[{ active: path.includes('/blog') }]}
             aria-current={path.includes('/blog') ? 'page' : undefined}
           >{t('nav.blog')}</a>
@@ -64,41 +63,82 @@ const navHref = (anchor: string) => {
 </header>
 
 <script>
-  const toggle = document.getElementById('menu-toggle');
-  const nav    = document.getElementById('main-nav');
-  const header = document.getElementById('site-header');
+  const initHeader = () => {
+    const toggle = document.getElementById('menu-toggle');
+    const nav    = document.getElementById('main-nav');
+    const header = document.getElementById('site-header');
 
-  toggle?.addEventListener('click', () => {
-    const open = nav?.classList.toggle('active');
-    toggle.setAttribute('aria-expanded', String(!!open));
-  });
-  nav?.querySelectorAll('a').forEach((l) => l.addEventListener('click', () => {
-    nav.classList.remove('active');
-    toggle?.setAttribute('aria-expanded', 'false');
-  }));
+    if (!header) return;
 
-  document.querySelectorAll('nav a[href^="#"]').forEach((link) => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const target = document.querySelector((link as HTMLAnchorElement).getAttribute('href')!);
-      if (target) {
-        const h = (document.querySelector('header') as HTMLElement).offsetHeight;
-        window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - h, behavior: 'smooth' });
-      }
+    toggle?.addEventListener('click', () => {
+      const open = nav?.classList.toggle('active');
+      toggle.setAttribute('aria-expanded', String(!!open));
     });
-  });
 
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('nav a');
+    nav?.querySelectorAll('a').forEach((l) => l.addEventListener('click', () => {
+      nav.classList.remove('active');
+      toggle?.setAttribute('aria-expanded', 'false');
+    }));
 
-  const onScroll = () => {
-    let current = '';
-    sections.forEach((s) => { if (window.pageYOffset >= (s as HTMLElement).offsetTop - 120) current = '#' + s.id; });
-    navLinks.forEach((l) => { l.classList.remove('active'); if (l.getAttribute('href') === current) l.classList.add('active'); });
-    header?.classList.toggle('scrolled', window.pageYOffset > 4);
+    document.querySelectorAll('nav a[href*="#"]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href') || '';
+        
+        const cleanPath = window.location.pathname.replace(/\/$/, '');
+        const targetPath = href.split('#')[0].replace(/\/$/, '');
+        const isCurrentPageAnchor = href.startsWith('#') || cleanPath === targetPath;
+
+        if (isCurrentPageAnchor) {
+          const targetId = href.substring(href.indexOf('#'));
+          const target = document.querySelector(targetId);
+          
+          if (target) {
+            e.preventDefault();
+            const h = header.offsetHeight || 56;
+            window.scrollTo({ 
+              top: target.getBoundingClientRect().top + window.scrollY - h - 10, 
+              behavior: 'smooth' 
+            });
+            history.pushState(null, '', targetId);
+          }
+        }
+      });
+    });
+
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav a');
+
+    const onScroll = () => {
+      let currentAnchor = '';
+      const scrollPos = window.scrollY || window.pageYOffset;
+
+      sections.forEach((s) => {
+        const el = s as HTMLElement;
+        if (el && scrollPos >= el.offsetTop - 140) {
+          currentAnchor = '#' + el.id;
+        }
+      });
+
+      navLinks.forEach((l) => {
+        const href = l.getAttribute('href') || '';
+        if (href.includes('#')) {
+          if (currentAnchor && href.endsWith(currentAnchor)) {
+            l.classList.add('active');
+          } else {
+            l.classList.remove('active');
+          }
+        }
+      });
+
+      header.classList.toggle('scrolled', scrollPos > 4);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   };
-  window.addEventListener('scroll', onScroll);
-  onScroll();
+
+  initHeader();
+  document.addEventListener('astro:after-swap', initHeader);
 </script>
 
 <style>
@@ -107,7 +147,8 @@ const navHref = (anchor: string) => {
     position: fixed;
     top: 0; left: 0; right: 0;
     background-color: var(--md-surface);
-    z-index: 1000;
+    z-index: 9999;
+    transform: translateZ(0);
     box-shadow: var(--elevation-0);
     transition: background-color var(--motion-medium-2) var(--easing-standard), box-shadow var(--motion-medium-2) var(--easing-standard);
   }
@@ -130,11 +171,16 @@ const navHref = (anchor: string) => {
     align-items: center;
     height: 2.25rem;
     padding: 0 0.9rem;
-    border-radius: var(--shape-full);
+    
+    --btn-radius-full: calc(2.25rem / 2);
+    border-radius: var(--btn-radius-full);
+    
     color: var(--md-on-surface-variant);
     isolation: isolate;
     overflow: hidden;
-    transition: color var(--motion-short-4) var(--easing-standard);
+    transition: 
+      color var(--motion-short-4) var(--easing-standard), 
+      border-radius var(--motion-medium-2) var(--easing-spring);
   }
   .nav-item::before {
     content: '';
@@ -147,6 +193,9 @@ const navHref = (anchor: string) => {
   }
   .nav-item:hover { color: var(--md-on-surface); opacity: 1; }
   .nav-item:hover::before { opacity: var(--state-hover); }
+  
+  .nav-item:not(hover) { border-radius: var(--btn-radius-full); }
+  
   .nav-item.active {
     color: var(--md-on-primary-container);
     background: var(--md-primary-container);
@@ -196,6 +245,12 @@ const navHref = (anchor: string) => {
     }
     nav.active { display: block; }
     nav ul { flex-direction: column; gap: 0.25rem; }
-    .nav-item { display: flex; height: 2.75rem; padding: 0 1rem; }
+    .nav-item { 
+      display: flex; 
+      height: 2.75rem; 
+      padding: 0 1rem; 
+      --btn-radius-full: calc(2.75rem / 2);
+      border-radius: var(--btn-radius-full);
+    }
   }
 </style>
